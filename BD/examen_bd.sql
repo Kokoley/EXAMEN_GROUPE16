@@ -1,0 +1,82 @@
+CREATE DATABASE  gestion_dechets_db;
+USE gestion_dechets_db;
+
+
+CREATE TABLE sites (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nom VARCHAR(120) NOT NULL,
+  localisation VARCHAR(255) NOT NULL,
+  description TEXT NULL,
+  actif BOOLEAN NOT NULL DEFAULT TRUE,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(190) NOT NULL,
+  password_hash VARCHAR(255) NOT NULL,
+  nom VARCHAR(120) NOT NULL,
+  prenom VARCHAR(120) NOT NULL,
+  role VARCHAR(50) NOT NULL,
+  site_id INT NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY uq_users_email (email),
+  CONSTRAINT fk_users_site FOREIGN KEY (site_id) REFERENCES sites(id) ON DELETE SET NULL,
+  CONSTRAINT chk_users_role CHECK (role IN ('CHEF_SITE', 'AGENT_COLLECTEUR', 'OPERATEUR', 'ADMINISTRATEUR'))
+) ENGINE=InnoDB;
+
+CREATE TABLE camions (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  immatriculation VARCHAR(30) NOT NULL,
+  libelle VARCHAR(120) NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY uq_camions_immatriculation (immatriculation)
+) ENGINE=InnoDB;
+
+CREATE TABLE signalements (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  description TEXT NOT NULL,
+  photo_url VARCHAR(255) NULL,
+  latitude DECIMAL(10,7) NOT NULL,
+  longitude DECIMAL(10,7) NOT NULL,
+  statut VARCHAR(50) NOT NULL DEFAULT 'NOUVEAU',
+  site_id INT NULL,
+  cree_par_id INT NOT NULL,
+  cree_le DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_signalements_user FOREIGN KEY (cree_par_id) REFERENCES users(id) ON DELETE RESTRICT,
+  CONSTRAINT fk_signalements_site FOREIGN KEY (site_id) REFERENCES sites(id) ON DELETE SET NULL,
+  CONSTRAINT chk_signalement_statut CHECK (statut IN ('NOUVEAU', 'VALIDE', 'PLANIFIE', 'EN_COURS', 'TRAITE', 'ANNULE'))
+) ENGINE=InnoDB;
+
+CREATE TABLE collectes (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  titre VARCHAR(200) NOT NULL,
+  date_prevu DATE NOT NULL,
+  statut VARCHAR(50) NOT NULL DEFAULT 'PLANIFIEE',
+  itineraire JSON NOT NULL,
+  equipe_ids JSON NOT NULL,
+  signalement_ids JSON NOT NULL,
+  camion_id INT NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_collectes_camion FOREIGN KEY (camion_id) REFERENCES camions(id) ON DELETE SET NULL,
+  CONSTRAINT chk_collecte_statut CHECK (statut IN ('PLANIFIEE', 'EN_COURS', 'TERMINEE', 'ANNULEE'))
+) ENGINE=InnoDB;
+
+CREATE TABLE notifications (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  titre VARCHAR(200) NOT NULL,
+  message TEXT NOT NULL,
+  lu BOOLEAN NOT NULL DEFAULT FALSE,
+  cree_le DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_notifications_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+CREATE TABLE positions_gps (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  agent_id INT NOT NULL,
+  latitude DECIMAL(10,7) NOT NULL,
+  longitude DECIMAL(10,7) NOT NULL,
+  enregistre_le DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_positions_agent FOREIGN KEY (agent_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB;

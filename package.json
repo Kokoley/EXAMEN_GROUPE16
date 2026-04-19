@@ -1,0 +1,13 @@
+{
+  "name": "examen-groupe16",
+  "private": true,
+  "description": "Lance le backend Node et le frontend Vite pour les tests locaux",
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c cyan,magenta \"npm run dev --prefix BACK-END\" \"npm run dev --prefix FONT-END\"",
+    "dev:backend": "npm run dev --prefix BACK-END",
+    "dev:frontend": "npm run dev --prefix FONT-END"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

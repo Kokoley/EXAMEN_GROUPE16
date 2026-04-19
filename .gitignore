@@ -1,0 +1,14 @@
+node_modules/
+BACK-END/node_modules/
+FONT-END/node_modules/
+
+.env
+BACK-END/.env
+FONT-END/.env
+
+dist/
+build/
+.vite/
+
+.DS_Store
+*.log
