@@ -1,7 +1,5 @@
 COLLECTE PRO
 
-
-
 **Description**
 
 &#x20;    
@@ -62,8 +60,6 @@ npm install
 
 npm run dev
 
-
-
 3\) Créer le premier admin:
 
 ouvrez le projet, accéder au terminal puis tapez ça :
@@ -81,8 +77,6 @@ cd FONT-END
 npm install
 
 npm run dev
-
-
 
 **Contributeurs**
 
@@ -111,7 +105,6 @@ TAKULILWE AMADI VICTORINE
 WIVINE MUTUZA TABU
 
 ZAGABE AGANZE ESTHER
-
 
 **Amélioration à faire**
 
