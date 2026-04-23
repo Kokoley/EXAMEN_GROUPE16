@@ -6,13 +6,9 @@ COLLECTE PRO
 
 &#x20;    
 
-Ce projet est une application de gestion des déchets permettant de suivre et organiser les opérations d’évacuation en temps réel. Il vise à améliorer l’efficacité des services de collecte et à offrir une meilleure visibilité sur les activités.
-
-
+Ce projet est une application de gestion des déchets permettant de suivre et organiser les opérations d’évacuation en temps réel. Il vise à améliorer l’efficacité des services de collecte et à offrir une meilleure visibilité sur les activités
 
 **Fonctionnalités**
-
-
 
 &#x20;• CRUD 
 
@@ -28,11 +24,7 @@ Ce projet est une application de gestion des déchets permettant de suivre et or
 
 &#x20;• Notifications, utilisation de gps pour le suivi en temps réel
 
-
-
 **Technologies utilisées**
-
-
 
 &#x20;Frontend : \[React, Vite, Tailwind, Axios]
 
@@ -42,11 +34,7 @@ Ce projet est une application de gestion des déchets permettant de suivre et or
 
 &#x20;Autres : vitest, testing library et supertest
 
-
-
 **Sécurité**
-
-
 
 Authentification des utilisateurs
 
@@ -54,11 +42,7 @@ Gestion des accèes et rôles
 
 Protection des données
 
-
-
 **Installation et configuration**
-
-
 
 pour tester cette application en local, commencer d'abord par cloner le projet puis suivez ces étapes :
 
@@ -66,11 +50,7 @@ pour tester cette application en local, commencer d'abord par cloner le projet p
 
 &#x20;1) Démarrer MySQL (WAMP/XAMP) et importer `examen\_bd.sql qui se trouve dans le dossier bd`      puis exécuter
 
-
-
 avant de lancer le projet, modifier la configuration du fichier .env qui est dns le dossier back-end
-
-
 
 2\) Backend:
 
@@ -92,8 +72,6 @@ cd BACK-END
 
 npm run create:admin -- email MotDePasse Prenom Nom
 
-
-
 4\) Frontend:
 
 ouvrez le projet, accéder au terminal puis tapez ça :
@@ -107,8 +85,6 @@ npm run dev
 
 
 **Contributeurs**
-
-
 
 WASWEKO MUMBAKA GEORGES
 
@@ -135,7 +111,6 @@ TAKULILWE AMADI VICTORINE
 WIVINE MUTUZA TABU
 
 ZAGABE AGANZE ESTHER
-
 
 
 **Amélioration à faire**
